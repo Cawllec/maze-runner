@@ -9,6 +9,6 @@ install:
 - bundle install
 
 script:
-- bundle exec ./bin/rake
+- bundle exec rake
 
 rvm: 2.4.4

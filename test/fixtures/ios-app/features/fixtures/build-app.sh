@@ -4,16 +4,24 @@ if [ ! -d "ios-app.xcworkspace" ]; then
     cd "$(dirname "$0")/.."
 fi
 
-osascript -e 'launch application "Simulator"'
-sleep 4
-
+rm -rf build
 xcrun xcodebuild \
-  -scheme MazeRunner \
-  -workspace ios-app.xcworkspace \
+  -scheme iOSTestApp \
+  -workspace iOSTestApp.xcworkspace \
   -configuration Debug \
   -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.2' \
   -derivedDataPath build \
-  build
+  -quiet \
+  clean build
 
-xcrun simctl install booted \
-  build/Build/Products/Debug-iphonesimulator/MazeRunner.app
+INSTALL_PATH=build/Build/Products/Debug-iphonesimulator/iOSTestApp.app
+
+# Simulators used in the test suite:
+xcrun simctl boot "iPhone8-11.2"; true
+
+# Install the app on each simulator
+xcrun simctl install "iPhone8-11.2" "$INSTALL_PATH"
+
+# Preheat the simulators by triggering a crash
+xcrun simctl launch "iPhone8-11.2" com.bugsnag.iOSTestApp \
+    "EVENT_TYPE=preheat"

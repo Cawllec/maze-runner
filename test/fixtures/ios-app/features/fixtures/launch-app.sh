@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-osascript -e 'launch application "Simulator"'
 xcrun simctl launch --console booted com.bugsnag.MazeRunner \
     "EVENT_TYPE=$EVENT_TYPE" \
     "EVENT_DELAY=$EVENT_DELAY" \

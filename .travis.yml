@@ -1,7 +1,12 @@
 sudo: false
 
+language: ruby
+
+osx_image: xcode9.2
+env: SDK=iphonesimulator11.2
+
 install:
-- bundle install --binstubs
+- bundle install
 
 script:
 - bundle exec ./bin/rake

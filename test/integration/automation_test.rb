@@ -49,9 +49,10 @@ CONTENTS
 
   def run_scenario fixture_path
     Dir.chdir(fixture_path) do
-        Process.wait Process.spawn("bundle", "exec", "bugsnag-maze-runner")
-        status = $?.exitstatus
-        assert_equal(0, status, "Scenario failed: #{fixture_path}")
+      Process.wait Process.spawn("bundle", "install")
+      Process.wait Process.spawn("bundle", "exec", "bugsnag-maze-runner")
+      status = $?.exitstatus
+      assert_equal(0, status, "Scenario failed: #{fixture_path}")
     end
   end
 end

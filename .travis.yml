@@ -1,13 +1,7 @@
 sudo: false
 
-before_install:
-- gem update --system 2.6.14
-- gem --version
-- gem install bundler -v $BUNDLE_VERSION
-- bundle _${BUNDLE_VERSION}_ --version
-
 install:
-- bundle _${BUNDLE_VERSION}_ install --with "$GEMSETS" --binstubs
+- bundle install --binstubs
 
 script:
 - bundle exec ./bin/rake

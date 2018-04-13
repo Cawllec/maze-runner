@@ -3,7 +3,7 @@ sudo: required
 services:
  - docker
 
-language: ruby
+language: objective-c
 
 osx_image: xcode9.2
 env: SDK=iphonesimulator11.2
